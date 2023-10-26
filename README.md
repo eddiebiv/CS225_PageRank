@@ -1,4 +1,4 @@
 # Extra Credit Project - PageRank
 ### Team members
-Ahmed Shafiuddin (ahmeds4)
-Eddie Brenmark (ebren3)
+* Ahmed Shafiuddin (ahmeds4)
+* Eddie Brenmark (ebren3)
