@@ -1,2 +1,4 @@
-# CS225_PageRank
-Fall 2023 CS 225 extra credit project
+# Extra Credit Project - PageRank
+### Team members
+Ahmed Shafiuddin (ahmeds4)
+Eddie Brenmark (ebren3)
