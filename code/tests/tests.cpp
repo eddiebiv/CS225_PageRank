@@ -25,7 +25,7 @@ TEST_CASE("Case 1: 3 disconnected components", "[weight=5]")
 /*
  * Reads in the dataset and searches for the data on row 2
  */
-TEST_CASE("Case 2: Site B's Rank", "[weight=5]")
+TEST_CASE("Case 2: 3 connected components; C is only outgoing", "[weight=5]")
 {
 	std::vector<double> expected;
     expected.push_back(0.464);
@@ -33,9 +33,9 @@ TEST_CASE("Case 2: Site B's Rank", "[weight=5]")
     expected.push_back(0.05);
 
     std::string infile = "../../data/webgraph_variations.csv";
-    std::string search = "2";
-    WebGraph(infile, search);
-    std::vector<double> out = getPageRank();
+    int search = 2;
+    WebGraph graph(infile, search);
+    std::vector<double> out = graph.getPageRank();
 
     REQUIRE(expected == out);
 }
@@ -43,7 +43,7 @@ TEST_CASE("Case 2: Site B's Rank", "[weight=5]")
 /*
  * Reads in the dataset and searches for the data on row 3
  */
-TEST_CASE("Case 3: Site C's Rank", "[weight=5]")
+TEST_CASE("Case 3: 3 connected components", "[weight=5]")
 {
 	std::vector<double> expected;
     expected.push_back(0.433);
@@ -51,9 +51,9 @@ TEST_CASE("Case 3: Site C's Rank", "[weight=5]")
     expected.push_back(0.234);
 
     std::string infile = "../../data/webgraph_variations.csv";
-    std::string search = "3";
-    WebGraph(infile, search);
-    std::vector<double> out = getPageRank();
+    int search = 3;
+    WebGraph graph(infile, search);
+    std::vector<double> out = graph.getPageRank();
 
     REQUIRE(expected == out);
 }

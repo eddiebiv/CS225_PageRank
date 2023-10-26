@@ -63,7 +63,7 @@ This function iterates through this limit $\lim\limits_{n\to\infty} A^k v$ and t
 ```
 @return The ranked vectors (in terms of their probabilities)
 ```
-Getter function which fetches and returns the private variable `rankedList` of type `std::vector<double>` storing the ranks of each respective page.
+Getter function which fetches and returns the private variable `rankedList` of type `std::vector<double>` storing the ranks of each respective page after their respective rank is calculated. The values stored in `rankedList` are what gets compared to the expected PageRank vector in the test cases. The expected values in the test cases are calculated manually and allow us to confirm the accuracy of the program's calculations.
 
 `std::vector<std::vector<double>> colMatrixMul(std::vector<std::vector<double>>& A, std::vector<double>& B);`
 ```
@@ -92,6 +92,6 @@ Sums all the given entries in a column and returns the result.
 
 ## Data Description
 
-
+The datasets used for our test cases were manually constructed in Excel to ensure correctness and to provide a logical increase in complexity as more tests get ran. Each row of the .csv file represents a web of pages with varying connections between sites. We chose to implement the data by row to allow easy distinction between different cases.
 
 
