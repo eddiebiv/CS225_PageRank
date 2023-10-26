@@ -57,7 +57,7 @@ Then obtain the steady-state eigenvector (with eigenvalue 1) through power itera
 @param A: reference to a markov matrix with entires all > 0 (necessary for unique convergence)
 @param vect: reference to an existing normalized vector
 ```
-This function iterates through this limit $\lim\limits_{n\to\infty} A^k v$ and then stores the end resultant converged vector back into `vect`. 
+This function iterates through this limit $\lim\limits_{k\to\infty} A^k v$ and then stores the end resultant converged vector back into `vect`. 
 
 `std::vector<double> getPageRank();`
 ```
