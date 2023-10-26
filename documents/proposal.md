@@ -92,6 +92,6 @@ Sums all the given entries in a column and returns the result.
 
 ## Data Description
 
-The datasets used for our test cases were manually constructed in Excel to ensure correctness and to provide a logical increase in complexity as more tests get ran. Each row of the .csv file represents a web of pages with varying connections between sites. We chose to implement the data by row to allow easy distinction between different cases.
+The dataset used for our test cases was manually constructed in Excel to ensure correctness and to provide a logical increase in complexity as more tests get ran. Each row of the .csv file represents a web of pages with varying connections between sites. We chose to implement the data by row to allow easy distinction between different cases.
 
 
