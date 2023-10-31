@@ -65,12 +65,12 @@ This function iterates through this limit $\lim\limits_{k\to\infty} A^k v$ and t
 ```
 Getter function which fetches and returns the private variable `rankedList` of type `std::vector<double>` storing the ranks of each respective page after their respective rank is calculated. The values stored in `rankedList` are what gets compared to the expected PageRank vector in the test cases. The expected values in the test cases are calculated manually and allow us to confirm the accuracy of the program's calculations.
 
-`std::vector<std::vector<double>> colMatrixMul(std::vector<std::vector<double>>& A, std::vector<double>& B);`
+`std::vector<double> colMatrixMul(std::vector<std::vector<double>>& A, std::vector<double>& B);`
 ```
 @param A: n x n matrix 
 @param B: column vector with R^n
 
-@return resultant matrix product
+@return resultant matrix product as column vector in R^n 
 ```
 Performs matrix multiplication (via linear combination method) where A is an n by n matrix and B is a simple column vector. The result is as follows: $AB = \vec{a}_1b_1 + \vec{a}_2b_2 + ... + \vec{a}_nb_n$.
 
@@ -84,7 +84,7 @@ Performs simple scalar multiplication on a matrix and saves it in the original m
 `double columnSum(std::vector<std::vector<double>>& A, unsigned col);`
 ```
 @param A: any matrix
-@param col: a valid column index within A 
+@param col: a valid column index (zero-based) within A 
 
 @return sum of all entries within specified column
 ```
@@ -93,5 +93,3 @@ Sums all the given entries in a column and returns the result.
 ## Data Description
 
 The dataset used for our test cases was manually constructed in Excel to ensure correctness and to provide a logical increase in complexity as more tests get ran. Each row of the .csv file represents a web of pages with varying connections between sites. We chose to implement the data by row to allow easy distinction between different cases.
-
-

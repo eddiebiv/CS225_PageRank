@@ -4,6 +4,61 @@
 
 #include <sstream>
 
+
+TEST_CASE("Matrix Multiplication (lin. comb.)", "[weight=5]")
+{
+    std::vector<std::vector<double>> initial_mat1 = {{1, 1},
+                                                     {0, 1}};
+    std::vector<double> initial_mat2 = {2, 
+                                        0};                                           
+
+    std::vector<std::vector<double>> expected_mat = {2,
+                                                     0};
+    std::vector<double> out = colMatrixMult(initial_mat1, initial_mat2);
+    REQUIRE(expected_mat == out);
+}
+
+TEST_CASE("Scalar Multiplication", "[weight=5]")
+{
+    std::vector<std::vector<double>> initial_mat = {{1, 1, 1},
+                                                    {1, 1, 0}};
+    std::vector<std::vector<double>> expected_mat = {{5, 5, 5},
+                                                     {5, 5, 0}};
+    std::vector<std::vector<double>> out = scalarMult(initial_mat, 5);
+    REQUIRE(expected_mat == out);
+}
+
+TEST_CASE("Column Sum", "[weight=5]")
+{
+    std::vector<std::vector<double>> initial_mat = {{1, 0, 1},
+                                                    {1, 1, 8}};
+    double expected = 2;
+    double out = columnSum(initial_mat, 0);
+    REQUIRE(expected == out);
+}
+
+
+TEST_CASE("Converting to markov matrix (basic, case=3)", "[weight=5]")
+{
+
+    // (will be stored in graph.matrix)
+    // std::vector<std::vector<double>> initial_mat = {{0, 1, 1},
+    //                                                 {1, 0, 1},
+    //                                                 {1, 0, 0}};
+
+    std::vector<std::vector<double>> expected_mat = {{0, 1, .5},
+                                                    {.5, 0, .5},
+                                                    {.5, 0, 0}};
+
+    std::string infile = "../../data/webgraph_variations.csv";
+    int search = 2;
+	
+    WebGraph graph(infile, search);
+    graph.convertToMarkov();
+
+    REQUIRE(expected_mat == graph.matrix);
+}
+
 /*
  * Reads in the dataset and searches for the data on row 1
  */
