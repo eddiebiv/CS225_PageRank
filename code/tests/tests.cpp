@@ -124,3 +124,43 @@ TEST_CASE("Case 3: 3 connected components", "[weight=5]")
 
     REQUIRE(expected == out);
 }
+
+TEST_CASE("WebGraph constructor", "[weight=5]")
+{
+    std::vector<std::vector<double>> expected_mat = {{0, 0, 0},
+                                                    {0, 0, 1},
+                                                    {0, 0, 0}};
+
+    std::string infile = "../../data/3vertices.csv";
+    int search = 1;
+
+    WebGraph graph(infile, search);
+    std::vector<std::vector<double>> out = graph.matrix;
+
+    REQUIRE(expected == out);
+}
+
+TEST_CASE("convertToAdjacency", "[weight=5]")
+{
+    std::vector<std::vector<double>> expected_mat = {{0, 0, 0},
+                                                    {0, 0, 1},
+                                                    {0, 0, 0}};
+
+    std::string text = "1,0,0,2"
+
+    std::vector<std::vector<double>> out = convertToAdjacency(text);
+
+    REQUIRE(expected == out);
+}
+
+TEST_CASE("processInput", "[weight=5]")
+{
+    std::string expected = "1,0,0,2"
+
+    std::string infile = "../../data/3vertices.csv";
+    int row = 2;
+
+    std::string out = processInput(infile, row);
+
+    REQUIRE(expected == out);
+}
