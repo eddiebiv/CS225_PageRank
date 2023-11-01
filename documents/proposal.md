@@ -93,3 +93,4 @@ Sums all the given entries in a column and returns the result.
 ## Data Description
 
 The dataset used for our test cases was manually constructed in Excel to ensure correctness and to provide a logical increase in complexity as more tests get ran. Each row of the .csv file represents a web of pages with varying connections between sites. We chose to implement the data by row to allow easy distinction between different cases.
+We also added additional datasets produced by a Python script (testCSV.py) that contain different graphs with different numbers of vertices from 3 to 1000. In the files titled "Xvertices.csv", each row is a different graph for testing, the column index is a specific node in the graph, and the cells are the nodes that the current column index node is pointing to. The file titled "musae_facebook_edges.csv" contains a real dataset of a large network graph.
