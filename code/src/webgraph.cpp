@@ -6,35 +6,51 @@
 
 
 /* Constructing */
-WebGraph::WebGraph(std::string input, int searchIndex){
+WebGraph::WebGraph(std::string input, int searchIndex)
+{
 
 }
 
-std::string processInput(std::string& input, int& row){
-
+std::vector<std::vector<double>> WebGraph::getMat()
+{
+    return matrix;
 }
 
-std::vector<double> getPageRank(){
-
+std::vector<double> WebGraph::getRankedList()
+{
+    return rankedList;
 }
 
+std::string WebGraph::processInput(std::string& input, int& row)
+{
+
+    return std::string();
+}
+
+std::vector<double> WebGraph::getPageRank()
+{
+    return std::vector<double>();
+}
 
 /* Graph Conversion */
-void convertToAdjacency(std::string& text){
+void WebGraph::convertToAdjacency(std::string& text)
+{
 
 }
 
-void convertToMarkov(){
+void WebGraph::convertToMarkov()
+{
 
 }
 
-void computePageRank(){
+void WebGraph::computePageRank()
+{
 
 }
-
 
 /* Linear Algerbra */
-std::vector<double> colMatrixMult(std::vector<std::vector<double>>& A, std::vector<double>& B){
+std::vector<double> colMatrixMult(std::vector<std::vector<double>>& A, std::vector<double>& B)
+{
     int n = A.size();
     std::vector<double> result(n, 0.0);
 
@@ -47,7 +63,8 @@ std::vector<double> colMatrixMult(std::vector<std::vector<double>>& A, std::vect
     return result;
 }
 
-std::vector<std::vector<double>> scalarMult(std::vector<std::vector<double>>& A, double scalar){
+void scalarMult(std::vector<std::vector<double>>& A, double scalar)
+{
     int rows = A.size();
     int cols = A[0].size();
 
@@ -58,7 +75,8 @@ std::vector<std::vector<double>> scalarMult(std::vector<std::vector<double>>& A,
     }
 }
 
-double columnSum(std::vector<std::vector<double>>& A, unsigned col){
+double columnSum(std::vector<std::vector<double>>& A, unsigned col)
+{
     double sum = 0.0;
 
     for (const auto& row : A) {

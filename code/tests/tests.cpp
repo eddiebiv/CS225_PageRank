@@ -1,7 +1,5 @@
 #include <catch2/catch_test_macros.hpp>
-
 #include "../src/webgraph.h"
-
 #include <sstream>
 
 
@@ -12,8 +10,8 @@ TEST_CASE("Matrix Multiplication (lin. comb.)", "[weight=5]")
     std::vector<double> initial_mat2 = {2, 
                                         0};                                           
 
-    std::vector<std::vector<double>> expected_mat = {2,
-                                                     0};
+    std::vector<double> expected_mat = {2,
+                                        0};
     std::vector<double> out = colMatrixMult(initial_mat1, initial_mat2);
     REQUIRE(expected_mat == out);
 }
@@ -24,8 +22,8 @@ TEST_CASE("Scalar Multiplication", "[weight=5]")
                                                     {1, 1, 0}};
     std::vector<std::vector<double>> expected_mat = {{5, 5, 5},
                                                      {5, 5, 0}};
-    std::vector<std::vector<double>> out = scalarMult(initial_mat, 5);
-    REQUIRE(expected_mat == out);
+    scalarMult(initial_mat, 5);
+    REQUIRE(expected_mat == initial_mat);
 }
 
 TEST_CASE("Column Sum", "[weight=5]")
@@ -36,7 +34,6 @@ TEST_CASE("Column Sum", "[weight=5]")
     double out = columnSum(initial_mat, 0);
     REQUIRE(expected == out);
 }
-
 
 TEST_CASE("Converting to markov matrix (basic, case=3)", "[weight=5]")
 {
