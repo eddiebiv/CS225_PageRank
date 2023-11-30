@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "c:/Users/eddie/Desktop/PageRank/CS225_PageRank/code/tests",
-      "program": "c:/Users/eddie/Desktop/PageRank/CS225_PageRank/code/tests/build/Debug/outDebug",
+      "cwd": "c:/Users/eddie/Desktop/cs225/PageRank/CS225_PageRank/code/src",
+      "program": "c:/Users/eddie/Desktop/cs225/PageRank/CS225_PageRank/code/src/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
