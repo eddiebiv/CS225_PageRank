@@ -7,12 +7,12 @@
 4. Implement Graph Construction constructor
 
 ### Tasks Completed
-Eddie was able to successfully implement the linear algebra functions. However, more thorough testing needs to happen.
+Implemented the linear algebra functions. However, more thorough testing needs to happen.
 
 ### Issues encountered (Questions for mentors)
 It is a bit tricky to work with .csv files, how can we easily integrate csv files into our program?
 
-### Plans for next week
+### Future Plans
 (Hopefully) get a working program for trivial .csv files so then we can advance to realistic inputs.
 
 ## November 29 2023
@@ -24,11 +24,12 @@ It is a bit tricky to work with .csv files, how can we easily integrate csv file
 4. Implement Graph Construction constructor
 
 ### Tasks Completed
-Ahmed implemented most of the graph conversion algorithm and also added additional necessary functions. 
+Implemented most of the graph conversion algorithm and also added additional necessary functions.
+Implemented processInput (needs tweaking)
 
 ### Issues encountered (Questions for mentors)
 N/A
 
-### Plans for next week
+### Future Plans
 (1) (Hopefully) get a working program for trivial .csv files so then we can advance to realistic inputs.
 (2) Build larger tests

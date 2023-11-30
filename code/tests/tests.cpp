@@ -1,5 +1,6 @@
 #include <catch2/catch_test_macros.hpp>
 #include "../src/webgraph.h"
+#include <fstream>
 #include <sstream>
 
 
@@ -139,13 +140,13 @@ TEST_CASE("convertToAdjacency", "[weight=5]")
 
 TEST_CASE("processInput", "[weight=5]")
 {
-    std::string expected = "1,0,0,2"
+    std::string expected = "1,0,0,2";
 
     std::string infile = "../../data/3vertices.csv";
-    int row = 2;
+    int search = 2;
 
     WebGraph graph(infile, search);
-    std::string out = graph.processInput(infile, row);
+    std::string out = graph.processInput(infile, search);
 
     REQUIRE(expected == out);
 }

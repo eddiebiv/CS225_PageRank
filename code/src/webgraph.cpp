@@ -3,6 +3,8 @@
 #include <vector>
 #include <string>
 #include <iostream>
+#include <fstream>
+#include <sstream>
 
 
 /* Constructing */
@@ -28,7 +30,29 @@ unsigned WebGraph::getNumberofNodes()
 
 std::string WebGraph::processInput(std::string& input, int& row)
 {
-    return std::string();
+    std::ifstream inputFile(input);
+    std::string graphText;      // text of the row where each cell is seperated by a comma
+
+    if(inputFile.is_open()){
+        std::string line;
+        int currentRow = 1;
+
+        while(std::getline(inputFile, line)){
+            if(currentRow == row){
+                // store the line in graphText
+                graphText = line;
+                break;
+            }
+            currentRow++;
+        }
+
+        inputFile.close();
+    } 
+    else{
+        std::cerr << "Unable to open file." << std::endl;
+    }
+
+    return graphText;
 }
 
 /* Graph Conversion */
