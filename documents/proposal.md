@@ -32,7 +32,6 @@ This constructor will take in the csv file and specific row index in the csv fil
 
 This helper function takes in the row index and a .csv file and returns the nodes as well as their outgoing links seperated by commas. By doing so, it effectively processes the csv file.
 
-
 `void convertToAdjacency(std::string& text)`
 ```
 @param text: comma seperated nodes
@@ -57,7 +56,16 @@ Then obtain the steady-state eigenvector (with eigenvalue 1) through power itera
 @param A: reference to a markov matrix with entires all > 0 (necessary for unique convergence)
 @param vect: reference to an existing normalized vector
 ```
-This function iterates through this limit $\lim\limits_{k\to\infty} A^k v$ and then stores the end resultant converged vector back into `vect`. 
+This function iterates through this limit $\lim\limits_{k\to\infty} A^k v$ and then stores the end resultant converged vector back into `vect`.
+
+`bool vectorEqual(std::vector<double>& a, std::vector<double>& b)`
+```
+@param a: a vector containing numbers
+@param b: another vector containing numbers
+
+@return whether each respective entries for a and b match
+```
+A simple helper function used to compare two vectors.
 
 `std::vector<double> getPageRank();`
 ```
@@ -65,7 +73,20 @@ This function iterates through this limit $\lim\limits_{k\to\infty} A^k v$ and t
 ```
 Getter function which fetches and returns the private variable `rankedList` of type `std::vector<double>` storing the ranks of each respective page after their respective rank is calculated. The values stored in `rankedList` are what gets compared to the expected PageRank vector in the test cases. The expected values in the test cases are calculated manually and allow us to confirm the accuracy of the program's calculations.
 
-`std::vector<double> colMatrixMul(std::vector<std::vector<double>>& A, std::vector<double>& B);`
+`unsigned getNumberofNodes();`
+```
+@return Number of nodes in current graph
+```
+Basic getter function which returns the dimension (across one axis) of our matrix.
+In other words, it is the number of nodes in our graph.
+
+`std::vector<std::vector<double>> WebGraph::getMat()`
+```
+@return matrix, private variable
+```
+Another getter which returns the current state of the matrix
+
+`std::vector<double> colMatrixMul(std::vector<std::vector<double>>& A, std::vector<double>& B)`
 ```
 @param A: n x n matrix 
 @param B: column vector with R^n
@@ -74,14 +95,14 @@ Getter function which fetches and returns the private variable `rankedList` of t
 ```
 Performs matrix multiplication (via linear combination method) where A is an n by n matrix and B is a simple column vector. The result is as follows: $AB = \vec{a}_1b_1 + \vec{a}_2b_2 + ... + \vec{a}_nb_n$.
 
-`void scalarMult(std::vector<std::vector<double>>& A, double scalar);`
+`void scalarMult(std::vector<std::vector<double>>& A, double scalar)`
 ```
 @param A: any matrix
 @param scalar: real number
 ```
 Performs simple scalar multiplication on a matrix and saves it in the original matrix.
 
-`double columnSum(std::vector<std::vector<double>>& A, unsigned col);`
+`double columnSum(std::vector<std::vector<double>>& A, unsigned col)`
 ```
 @param A: any matrix
 @param col: a valid column index (zero-based) within A 
@@ -89,6 +110,15 @@ Performs simple scalar multiplication on a matrix and saves it in the original m
 @return sum of all entries within specified column
 ```
 Sums all the given entries in a column and returns the result.
+
+`std::vector<std::vector<double>> matrixAddition(std::vector<std::vector<double>>& A, std::vector<std::vector<double>>& B)`
+```
+@param A: the first matrix in A+B
+@param B: the second matrix in A+B
+
+@return matrix where each entry is a sum of the respective entries of A and B
+```
+Performs matrix addition between two matrices A and B (of equal size) and returns the resultant matrix;
 
 ## Data Description
 
