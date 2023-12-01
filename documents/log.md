@@ -25,10 +25,10 @@ It is a bit tricky to work with .csv files, how can we easily integrate csv file
 
 ### Tasks Completed
 Implemented most of the graph conversion algorithm and also added additional necessary functions.
-Implemented processInput (needs tweaking)
+Implemented processInput (needs tweaking).
 
 ### Issues encountered (Questions for mentors)
-N/A
+How to ignore the first data value of each row of the csv file (the row index)?
 
 ### Future Plans
 (1) (Hopefully) get a working program for trivial .csv files so then we can advance to realistic inputs.
