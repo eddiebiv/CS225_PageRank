@@ -10,7 +10,8 @@
 /* Constructing */
 WebGraph::WebGraph(std::string input, int searchIndex)
 {
-
+    std::string nodeList = processInput(input, searchIndex);
+    convertToAdjacency(nodeList);
 }
 
 std::vector<std::vector<double>> WebGraph::getMat()
@@ -28,6 +29,21 @@ unsigned WebGraph::getNumberofNodes()
     return numberOfNodes;
 }
 
+std::string WebGraph::trimWhitespace(const std::string& str) 
+{
+    // lambda function to find first non whitespace char
+    auto firstNonSpace = std::find_if(str.begin(), str.end(), [](int ch) {
+        return !std::isspace(ch);
+    });
+
+    // finds last non whitespace char
+    auto lastNonSpace = std::find_if(str.rbegin(), str.rend(), [](int ch) {
+        return !std::isspace(ch);
+    });
+
+    return std::string(firstNonSpace, lastNonSpace.base());
+}
+
 std::string WebGraph::processInput(std::string& input, int& row)
 {
     std::ifstream inputFile(input);
@@ -38,7 +54,8 @@ std::string WebGraph::processInput(std::string& input, int& row)
         int currentRow = 0;
 
         while(std::getline(inputFile, line)){
-            if(currentRow == row){
+            if(currentRow == row)
+            {
                 // store the line in graphText
                 graphText = line;
                 break;
@@ -53,17 +70,61 @@ std::string WebGraph::processInput(std::string& input, int& row)
         return std::string();
     }
     
-    // remove all whitespace and return result
-    graphText.erase(std::remove_if(graphText.begin(), graphText.end(), ::isspace), graphText.end());
-    return graphText.substr(2, graphText.size());
+    // remove all trailing, ending whitespace and remove csv index
+    graphText = trimWhitespace(graphText);
+
+    return graphText.substr(2);
 }
 
 /* Graph Conversion */
 
-// @param text: comma seperated 
+// @param text: comma seperated nodes (ex. text=0,0,2)
+// the example signifies that nodes 1 and 2 are not pointing to any nodes whereas node 3 is pointing to node 2
+// (ex. text=3,3 1,1 2)
+// node 1 ---> nodes 3
+// node 2 ---> nodes 3, 1
+// node 3 ---> nodes 1, 2
+
+// Store this as a directed adjacency matrix,
+// initializing numberOfNodes, matrix
 void WebGraph::convertToAdjacency(std::string& text)
 {
+    std::istringstream commaDelimited(text);
+    std::string currBatch;
 
+    // Get total number of nodes
+    int numberOfBatches = 0;
+    while (std::getline(commaDelimited, currBatch, ','))
+    {
+        numberOfBatches++;
+    }
+
+    numberOfNodes = numberOfBatches;
+
+    // Reset stringstream for another iteration
+    commaDelimited.clear();
+    commaDelimited.seekg(0, std::ios::beg);
+
+    // Initialize matrix
+    matrix = std::vector<std::vector<double>>(numberOfNodes, std::vector<double>(numberOfNodes, 0.0));
+    unsigned i = 0;
+    while (std::getline(commaDelimited, currBatch, ','))
+    {
+        std::istringstream batchStream(currBatch);
+        unsigned directedNode;
+        // Goes through each space seperated number
+        while (batchStream >> directedNode) 
+        {
+            if (directedNode == 0)
+            {
+                continue;
+            }
+
+            directedNode--; // 1 indexed to 0 indexed
+            matrix[directedNode][i] = 1.0;
+        }
+        i++;
+    }
 }
 
 // Assumes current matrix is an adjacency matrix
@@ -78,11 +139,11 @@ void WebGraph::convertToMarkov()
             // No outgoing links case
             if (columnSum(matrix, j) == 0)
             {
-                markov[i][j] = 1 / numberOfNodes;
+                markov[i][j] = 1.0 / numberOfNodes;
                 continue;
             }
 
-            markov[i][j] = matrix[i][j] / columnSum(matrix, j);
+            markov[i][j] = static_cast<double>(matrix[i][j]) / columnSum(matrix, j);
         }
     }
 
@@ -93,15 +154,15 @@ void WebGraph::convertToMarkov()
 void WebGraph::computePageRank()
 {
     // Convert into final "PageRank" matrix
-    std::vector<std::vector<double>> ones (numberOfNodes, std::vector<double>(numberOfNodes, 1));
+    std::vector<std::vector<double>> ones (numberOfNodes, std::vector<double>(numberOfNodes, 1.0));
     std::vector<std::vector<double>> M = matrix;
     scalarMult(M, damp_fact);
-    scalarMult(ones, (1-damp_fact)/numberOfNodes);
+    scalarMult(ones, (1.0-damp_fact)/static_cast<double>(numberOfNodes));
     matrix = matrixAddition(M, ones);
 
     // Obtain stationary vector through power iteration
     std::vector<double> initialGuess (numberOfNodes, 0);
-    initialGuess[0] = 1;
+    initialGuess[0] = 1.0;
 
     powerIteration(matrix, initialGuess);
 }
@@ -193,7 +254,7 @@ std::vector<std::vector<double>> matrixAddition(std::vector<std::vector<double>>
     int rows = A.size();
     int cols = A[0].size();
 
-    std::vector<std::vector<double>> ret (A.size(), std::vector<double>(A[0].size(), 0));
+    std::vector<std::vector<double>> ret (A.size(), std::vector<double>(A[0].size(), 0.));
     for (int i = 0; i < rows; ++i) 
     {
         for (int j = 0; j < cols; ++j) 

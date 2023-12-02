@@ -32,6 +32,14 @@ This constructor will take in the csv file and specific row index in the csv fil
 
 This helper function takes in the row index and a .csv file and returns the nodes as well as their outgoing links seperated by commas. By doing so, it effectively processes the csv file.
 
+`std::string trimWhitespace(const std::string& str)`
+```
+@param str: const reference to a string
+
+@return the original string but with leading and trailing whitespace removed
+```
+A helper for a helper function (used to process incoming data from .csv files)
+
 `void convertToAdjacency(std::string& text)`
 ```
 @param text: comma seperated nodes
