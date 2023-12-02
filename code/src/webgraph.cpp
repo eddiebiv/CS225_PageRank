@@ -35,7 +35,7 @@ std::string WebGraph::processInput(std::string& input, int& row)
 
     if(inputFile.is_open()){
         std::string line;
-        int currentRow = 1;
+        int currentRow = 0;
 
         while(std::getline(inputFile, line)){
             if(currentRow == row){
@@ -50,12 +50,17 @@ std::string WebGraph::processInput(std::string& input, int& row)
     } 
     else{
         std::cerr << "Unable to open file." << std::endl;
+        return std::string();
     }
-
-    return graphText;
+    
+    // remove all whitespace and return result
+    graphText.erase(std::remove_if(graphText.begin(), graphText.end(), ::isspace), graphText.end());
+    return graphText.substr(2, graphText.size());
 }
 
 /* Graph Conversion */
+
+// @param text: comma seperated 
 void WebGraph::convertToAdjacency(std::string& text)
 {
 

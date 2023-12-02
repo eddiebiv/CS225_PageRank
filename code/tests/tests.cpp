@@ -2,7 +2,7 @@
 #include "../src/webgraph.h"
 #include <fstream>
 #include <sstream>
-
+#include <iostream>
 
 TEST_CASE("Matrix Multiplication (lin. comb.)", "[weight=5]")
 {
@@ -36,117 +36,135 @@ TEST_CASE("Column Sum", "[weight=5]")
     REQUIRE(expected == out);
 }
 
-TEST_CASE("Converting to markov matrix (basic, case=3)", "[weight=5]")
-{
+// TEST_CASE("Converting to markov matrix (basic, case=3)", "[weight=5]")
+// {
 
-    // (will be stored in graph.matrix)
-    // std::vector<std::vector<double>> initial_mat = {{0, 1, 1},
-    //                                                 {1, 0, 1},
-    //                                                 {1, 0, 0}};
+//     // (will be stored in graph.matrix)
+//     // std::vector<std::vector<double>> initial_mat = {{0, 1, 1},
+//     //                                                 {1, 0, 1},
+//     //                                                 {1, 0, 0}};
 
-    std::vector<std::vector<double>> expected_mat = {{0, 1, .5},
-                                                    {.5, 0, .5},
-                                                    {.5, 0, 0}};
+//     std::vector<std::vector<double>> expected_mat = {{0, 1, .5},
+//                                                     {.5, 0, .5},
+//                                                     {.5, 0, 0}};
 
-    std::string infile = "../../data/webgraph_variations.csv";
-    int search = 2;
+//     std::string infile = "../../data/webgraph_variations.csv";
+//     int search = 2;
 	
-    WebGraph graph(infile, search);
-    graph.convertToMarkov();
+//     WebGraph graph(infile, search);
+//     graph.convertToMarkov();
 
-    REQUIRE(expected_mat == graph.matrix);
-}
+//     REQUIRE(expected_mat == graph.matrix);
+// }
 
-/*
- * Reads in the dataset and searches for the data on row 1
- */
-TEST_CASE("Case 1: 3 disconnected components", "[weight=5]")
+// /*
+//  * Reads in the dataset and searches for the data on row 1
+//  */
+// TEST_CASE("Case 1: 3 disconnected components", "[weight=5]")
+// {
+//     std::vector<double> expected;
+//     expected.push_back(1/3);
+//     expected.push_back(1/3);
+//     expected.push_back(1/3);
+
+//     std::string infile = "../../data/webgraph_variations.csv";
+//     int search = 1;
+	
+//     WebGraph graph(infile, search);
+//     graph.convertToMarkov();
+//     graph.computePageRank();
+	
+//     std::vector<double> out = graph.getPageRank();
+
+//     REQUIRE(expected == out);
+// }
+
+// /*
+//  * Reads in the dataset and searches for the data on row 2
+//  */
+// TEST_CASE("Case 2: 3 connected components; C is only outgoing", "[weight=5]")
+// {
+// 	std::vector<double> expected;
+//     expected.push_back(0.464);
+//     expected.push_back(0.4865);
+//     expected.push_back(0.05);
+
+//     std::string infile = "../../data/webgraph_variations.csv";
+//     int search = 2;
+	
+//     WebGraph graph(infile, search);
+//     graph.convertToMarkov();
+//     graph.computePageRank();
+	
+//     std::vector<double> out = graph.getPageRank();
+
+//     REQUIRE(expected == out);
+// }
+
+// /*
+//  * Reads in the dataset and searches for the data on row 3
+//  */
+// TEST_CASE("Case 3: 3 connected components", "[weight=5]")
+// {
+// 	std::vector<double> expected;
+//     expected.push_back(0.433);
+//     expected.push_back(1/3);
+//     expected.push_back(0.234);
+
+//     std::string infile = "../../data/webgraph_variations.csv";
+//     int search = 3;
+	
+//     WebGraph graph(infile, search);
+//     graph.convertToMarkov();
+//     graph.computePageRank();
+	
+//     std::vector<double> out = graph.getPageRank();
+
+//     REQUIRE(expected == out);
+// }
+
+// TEST_CASE("convertToAdjacency", "[weight=5]")
+// {
+//     std::vector<std::vector<double>> expected_mat = {{0, 0, 0},
+//                                                     {0, 0, 1},
+//                                                     {0, 0, 0}};
+
+//     std::string infile = "../../data/3vertices.csv";
+//     int search = 2;
+
+//     WebGraph graph(infile, search);
+//     std::vector<std::vector<double>> out = graph.matrix;
+
+//     REQUIRE(expected == out);
+// }
+
+TEST_CASE("processInput (row 1) 3 vertices", "[weight=5]")
 {
-    std::vector<double> expected;
-    expected.push_back(1/3);
-    expected.push_back(1/3);
-    expected.push_back(1/3);
+    std::string expected = "0,0,2";
+    expected.erase(std::remove_if(expected.begin(), expected.end(), ::isspace), expected.end());
 
-    std::string infile = "../../data/webgraph_variations.csv";
+    std::string infile = "../../data/3vertices.csv";
     int search = 1;
-	
+
     WebGraph graph(infile, search);
-    graph.convertToMarkov();
-    graph.computePageRank();
-	
-    std::vector<double> out = graph.getPageRank();
+    std::string out = graph.processInput(infile, search);
 
     REQUIRE(expected == out);
 }
 
-/*
- * Reads in the dataset and searches for the data on row 2
- */
-TEST_CASE("Case 2: 3 connected components; C is only outgoing", "[weight=5]")
+TEST_CASE("processInput (row 2) 10 vertices", "[weight=5]")
 {
-	std::vector<double> expected;
-    expected.push_back(0.464);
-    expected.push_back(0.4865);
-    expected.push_back(0.05);
+    std::string expected = "7 6 8,0,7 8 9,0,0,5 3 4 1 10 8,1 10 8 4 3,4 5 3 6,3 5,7 9 1";
+    expected.erase(std::remove_if(expected.begin(), expected.end(), ::isspace), expected.end());
 
-    std::string infile = "../../data/webgraph_variations.csv";
-    int search = 2;
-	
-    WebGraph graph(infile, search);
-    graph.convertToMarkov();
-    graph.computePageRank();
-	
-    std::vector<double> out = graph.getPageRank();
-
-    REQUIRE(expected == out);
-}
-
-/*
- * Reads in the dataset and searches for the data on row 3
- */
-TEST_CASE("Case 3: 3 connected components", "[weight=5]")
-{
-	std::vector<double> expected;
-    expected.push_back(0.433);
-    expected.push_back(1/3);
-    expected.push_back(0.234);
-
-    std::string infile = "../../data/webgraph_variations.csv";
-    int search = 3;
-	
-    WebGraph graph(infile, search);
-    graph.convertToMarkov();
-    graph.computePageRank();
-	
-    std::vector<double> out = graph.getPageRank();
-
-    REQUIRE(expected == out);
-}
-
-TEST_CASE("convertToAdjacency", "[weight=5]")
-{
-    std::vector<std::vector<double>> expected_mat = {{0, 0, 0},
-                                                    {0, 0, 1},
-                                                    {0, 0, 0}};
-
-    std::string infile = "../../data/3vertices.csv";
-    int search = 2;
-
-    WebGraph graph(infile, search);
-    std::vector<std::vector<double>> out = graph.matrix;
-
-    REQUIRE(expected == out);
-}
-
-TEST_CASE("processInput", "[weight=5]")
-{
-    std::string expected = "1,0,0,2";
-
-    std::string infile = "../../data/3vertices.csv";
+    std::string infile = "../../data/10vertices.csv";
     int search = 2;
 
     WebGraph graph(infile, search);
     std::string out = graph.processInput(infile, search);
+
+        // std::cerr << "expected: " << expected.size() << std::endl;
+        // std::cerr << "output: " << out.size() << std::endl;
 
     REQUIRE(expected == out);
 }

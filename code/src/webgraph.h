@@ -1,5 +1,6 @@
 #include <vector>
 #include <string>
+#include <algorithm>
 
 // Linear Algebra functions
 std::vector<double> colMatrixMult(std::vector<std::vector<double>>& A, std::vector<double>& B);
@@ -12,6 +13,9 @@ class WebGraph
     public:
         WebGraph(std::string input, int searchIndex);
         
+        // Helper function to process .CSV files
+        std::string processInput(std::string& input, int& row);
+
         // Graph Conversion algorithms
         void convertToAdjacency(std::string& text);
         void convertToMarkov();
@@ -25,8 +29,6 @@ class WebGraph
     private:
         void powerIteration(std::vector<std::vector<double>>& A, std::vector<double>& vect);
         bool vectorEqual(std::vector<double>& a, std::vector<double>& b);
-        // Helper function to process .CSV files
-        std::string processInput(std::string& input, int& row);
 
         std::vector<std::vector<double>> matrix;
         std::vector<double> rankedList;
