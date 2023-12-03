@@ -1,3 +1,21 @@
+## December 03 2023
+
+### Goals
+1. Complete Linear Algebra functions (completed)
+2. Add more tests to further verify Linear Algebra functions (in progress)
+3. Implement Graph Conversion functions (completed)
+4. Implement Graph Construction constructor (completed)
+5. Integrate Facebook data
+
+### Tasks Completed
+-Added more exhaustive and complex tests for the linear algebra functions
+
+### Issues encountered (Questions for mentors)
+
+
+### Future Plans
+(1) Build tests for real-world inputs
+
 ## December 02 2023
 
 ### Goals
