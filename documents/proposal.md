@@ -126,7 +126,7 @@ Sums all the given entries in a column and returns the result.
 
 @return matrix where each entry is a sum of the respective entries of A and B
 ```
-Performs matrix addition between two matrices A and B (of equal size) and returns the resultant matrix;
+Performs matrix addition between two matrices A and B (of equal size) and returns the resultant matrix.
 
 ## Data Description
 
