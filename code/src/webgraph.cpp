@@ -78,8 +78,9 @@ std::string WebGraph::processInput(std::string& input, int& row)
 
 /* Graph Conversion */
 
-// @param text: comma seperated nodes (ex. text=0,0,2)
+// (ex. text=0,0,2)
 // the example signifies that nodes 1 and 2 are not pointing to any nodes whereas node 3 is pointing to node 2
+
 // (ex. text=3,3 1,1 2)
 // node 1 ---> nodes 3
 // node 2 ---> nodes 3, 1
