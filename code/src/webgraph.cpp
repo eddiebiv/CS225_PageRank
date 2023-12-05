@@ -1,12 +1,5 @@
 #include "webgraph.h"
 
-#include <vector>
-#include <string>
-#include <iostream>
-#include <fstream>
-#include <sstream>
-
-
 /* Constructing */
 WebGraph::WebGraph(std::string input, int searchIndex)
 {
@@ -31,7 +24,7 @@ unsigned WebGraph::getNumberofNodes()
 
 std::string WebGraph::trimWhitespace(const std::string& str) 
 {
-    // lambda function to find first non whitespace char
+    // find first non whitespace char (w/ lambda function)
     auto firstNonSpace = std::find_if(str.begin(), str.end(), [](int ch) {
         return !std::isspace(ch);
     });
@@ -201,9 +194,9 @@ std::vector<double> colMatrixMult(std::vector<std::vector<double>>& A, std::vect
     int n = A.size();
     std::vector<double> result(n, 0.0);
 
-    for (int i = 0; i < n; ++i) 
+    for (int j = 0; j < n; ++j) 
     {
-        for (int j = 0; j < n; ++j) 
+        for (int i = 0; i < n; ++i) 
         {
             result[i] += A[i][j] * B[j];
         }
